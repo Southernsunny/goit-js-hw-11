@@ -40,7 +40,7 @@ async function onRenderPage(e) {
     const response = await pixabayApi.fetchPhotosByQuery();
     const totalPicturs = response.data.totalHits;
 
-    if (totalPicturs  === 0) {
+    if (totalPicturs === 0) {
       alertNoEmptySearch();
       return;
     }
@@ -61,7 +61,7 @@ async function onLoadMore() {
   try {
     const response = await pixabayApi.fetchPhotosByQuery();
 
-    const lastPage = Math.ceil(response.data.totalHits / pixabayApi.per_page)
+    const lastPage = Math.ceil(response.data.totalHits / pixabayApi.per_page);
 
     createMarkup(response.data.hits);
 
@@ -69,7 +69,6 @@ async function onLoadMore() {
     autoScroll();
 
     if (lastPage === pixabayApi.page) {
-
       alertEndOfSearch();
       window.removeEventListener('scroll', handleScroll);
       return;
@@ -79,11 +78,10 @@ async function onLoadMore() {
   }
 }
 
-// function createMarkup(hits) {
-//   const markup = createGalleryCard(hits);
-//   refs.gallery.insertAdjacentHTML('beforeend', markup);
-// }
-
+function createMarkup(hits) {
+  const markup = createGalleryCard(hits);
+  refs.gallery.insertAdjacentHTML('beforeend', markup);
+}
 function createGalleryCard(hits) {
   return hits
     .map(
@@ -115,15 +113,11 @@ function createMarkup(hits) {
 }
 
 function alertNoEmptySearch() {
-  Notiflix.Notify.failure(
-    'The search string cannot be empty. Please specify your search query.'
-  );
+  Notiflix.Notify.failure('The search string cannot be empty. Please specify your search query.');
 }
 
 function alertEndOfSearch() {
-  Notiflix.Notify.warning(
-    "We're sorry, but you've reached the end of search results."
-  );
+  Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.");
 }
 
 // Функція для бескінечного скролу
@@ -134,40 +128,34 @@ function handleScroll() {
   }
 }
 
+// Цей код дозволяє автоматично прокручувати сторінку на висоту 2 карток галереї, коли вона завантажується
+function autoScroll() {
+  const { height: cardHeight } = document
+    .querySelector('.gallery')
+    .firstElementChild.getBoundingClientRect();
 
-  // Цей код дозволяє автоматично прокручувати сторінку на висоту 2 карток галереї, коли вона завантажується
-// function autoScroll() {
-//   const { height: cardHeight } = document
-//     .querySelector('.gallery')
-//     .firstElementChild.getBoundingClientRect();
-
-//   window.scrollBy({
-//     top: cardHeight * 2,
-//     behavior: 'smooth',
-//   });
-// }
-
-
+  window.scrollBy({
+    // top: cardHeight * 2,
+    top: cardHeight * 0,
+    behavior: 'smooth',
+  });
+}
 
 // ------- 2 variant --------
 
 /*
 const searchForm = document.getElementById('search-form');
 const gallery = document.querySelector('.gallery');
-
 let query = '';
 let page = 1;
 let simpleLightBox;
 const perPage = 40;
-
 searchForm.addEventListener('submit', onSearchForm);
-
 function renderGallery(images) {
   // Перевірка чи існує галерея перед вставкою даних
   if (!gallery) {
     return;
   }
-
   const markup = images
     .map(image => {
       const {
@@ -195,33 +183,27 @@ function renderGallery(images) {
       `;
     })
     .join('');
-
   gallery.insertAdjacentHTML('beforeend', markup);
-
   // Цей код дозволяє автоматично прокручувати сторінку на висоту 2 карток галереї, коли вона завантажується
   const { height: cardHeight } = document
     .querySelector('.gallery')
     .firstElementChild.getBoundingClientRect();
-
   window.scrollBy({
     top: cardHeight * 2,
     behavior: 'smooth',
   });
 }
-
 function onSearchForm(e) {
   e.preventDefault();
   page = 1;
   query = e.currentTarget.elements.searchQuery.value.trim();
   gallery.innerHTML = '';
-
   if (query === '') {
     Notiflix.Notify.failure(
       'The search string cannot be empty. Please specify your search query.',
     );
     return;
   }
-
   fetchImages(query, page, perPage)
     .then(data => {
       if (data.totalHits === 0) {
@@ -239,18 +221,14 @@ function onSearchForm(e) {
       searchForm.reset();
     });
 }
-
 function onloadMore() {
   page += 1;
   simpleLightBox.destroy();
-
   fetchImages(query, page, perPage)
     .then(data => {
       renderGallery(data.hits);
       simpleLightBox = new SimpleLightbox('.gallery a').refresh();
-
       const totalPages = Math.ceil(data.totalHits / perPage);
-
       if (page > totalPages) {
         Notiflix.Notify.failure(
           "We're sorry, but you've reached the end of search results.",
@@ -259,21 +237,18 @@ function onloadMore() {
     })
     .catch(error => console.log(error));
 }
-
 function checkIfEndOfPage() {
   return (
     window.innerHeight + window.pageYOffset >=
     document.documentElement.scrollHeight
   );
 }
-
 // Функція, яка виконуеться, якщо користувач дійшов до кінця сторінки
 function showLoadMorePage() {
   if (checkIfEndOfPage()) {
     onloadMore();
   }
 }
-
 // Додати подію на прокручування сторінки, яка викликає функцію showLoadMorePage
 window.addEventListener('scroll', showLoadMorePage);
 */

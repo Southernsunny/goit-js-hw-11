@@ -137,6 +137,17 @@ button:hover {
   position: relative;
   width: 40vw;
   border-radius: 10px;
+  box-shadow: 0 0 5px red;
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 5px red;
+    }
+    to {
+        box-shadow: 0 0 20px red;
+    }
 }
 
 .search-form input,
