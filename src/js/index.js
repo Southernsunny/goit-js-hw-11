@@ -78,10 +78,11 @@ async function onLoadMore() {
   }
 }
 
-function createMarkup(hits) {
-  const markup = createGalleryCard(hits);
-  refs.gallery.insertAdjacentHTML('beforeend', markup);
-}
+// function createMarkup(hits) {
+//   const markup = createGalleryCard(hits);
+//   refs.gallery.insertAdjacentHTML('beforeend', markup);
+// }
+
 function createGalleryCard(hits) {
   return hits
     .map(
