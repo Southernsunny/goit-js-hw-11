@@ -136,7 +136,7 @@ button:hover {
   align-items: center;
   font: inherit;
   position: relative;
-  width: 40vw;
+  width: 30vw;
   border-radius: 10px;
   box-shadow: 0 0 5px red;
   animation: glow 3s ease-in-out infinite alternate;
