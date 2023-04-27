@@ -21,7 +21,8 @@ refs.searchForm.addEventListener('submit', onRenderPage);
 
 async function onRenderPage(e) {
   e.preventDefault();
-  window.addEventListener('scroll', handleScroll);
+  window.removeEventListener('scroll', handleScroll); // Відключення обробки події scroll
+  // window.addEventListener('scroll', handleScroll);
 
   refs.gallery.innerHTML = '';
 
@@ -29,7 +30,7 @@ async function onRenderPage(e) {
   pixabayApi.query = searchQuery;
 
   pixabayApi.resetPage();
-  pixabayApi.page = 1;
+  // pixabayApi.page = 1;
 
   if (searchQuery === '') {
     alertNoEmptySearch();
@@ -51,6 +52,8 @@ async function onRenderPage(e) {
     lightbox.refresh();
     autoScroll();
 
+    window.addEventListener('scroll', handleScroll); // Відновлення обробки події scroll
+    
     if (hits.length < 40) {
       // alertEndOfSearch();
       window.removeEventListener('scroll', handleScroll);
@@ -149,6 +152,12 @@ function autoScroll() {
     behavior: 'smooth',
   });
 }
+
+
+
+
+
+
 
 // ------- 2 variant --------
 
