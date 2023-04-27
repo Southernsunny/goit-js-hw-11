@@ -21,7 +21,7 @@ refs.searchForm.addEventListener('submit', onRenderPage);
 
 async function onRenderPage(e) {
   e.preventDefault();
-  window.removeEventListener('scroll', handleScroll); // Відключення обробки події scroll
+  window.removeEventListener('scroll', handleScroll); // Відключення scroll
   // window.addEventListener('scroll', handleScroll);
 
   refs.gallery.innerHTML = '';
@@ -52,8 +52,8 @@ async function onRenderPage(e) {
     lightbox.refresh();
     autoScroll();
 
-    window.addEventListener('scroll', handleScroll); // Відновлення обробки події scroll
-    
+    window.addEventListener('scroll', handleScroll); // Відновлення scroll
+
     if (hits.length < 40) {
       // alertEndOfSearch();
       window.removeEventListener('scroll', handleScroll);
