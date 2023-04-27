@@ -39,15 +39,23 @@ async function onRenderPage(e) {
   try {
     const response = await pixabayApi.fetchPhotosByQuery();
     const totalPicturs = response.data.totalHits;
+    const hits = response.data.hits;
 
     if (totalPicturs === 0) {
       alertNoEmptySearch();
       return;
     }
 
-    createMarkup(response.data.hits);
+    // createMarkup(response.data.hits);
+    createMarkup(hits);
     lightbox.refresh();
     autoScroll();
+
+    if (hits.length < 40) {
+      // alertEndOfSearch();
+      window.removeEventListener('scroll', handleScroll);
+      Notiflix.Notify.info('We found less than 40 images. No more images will be loaded.');
+    }
 
     Notiflix.Notify.success(`Hooray! We found ${totalPicturs} images.`);
   } catch (err) {
