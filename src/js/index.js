@@ -57,7 +57,7 @@ async function onRenderPage(e) {
     if (hits.length < 40) {
       // alertEndOfSearch();
       window.removeEventListener('scroll', handleScroll);
-      Notiflix.Notify.info('We found less than 40 images. No more images will be loaded.');
+      // Notiflix.Notify.info('We found less than 40 images. No more images will be loaded.');
     }
 
     Notiflix.Notify.success(`Hooray! We found ${totalPicturs} images.`);
